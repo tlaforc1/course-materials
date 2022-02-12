@@ -17,3 +17,13 @@ Submit:
 1. Captured Output (csv file)
 2. Screen Capture of timing information (e.g.,> time ./YourBinary )
 3. Link to your updated code in your github repository (should be publically accessible) 
+
+Code scans TCP ports and returns information on if they are open or closed. 
+
+UPDATES:
+Updated PortScanner to take a value to scan to (inputing a value of 20 would scan ports 1-20). 
+Updated tests to work with the added functionality
+    Added a testVar variable to test to allow easy testing of different variables
+    Attepmpted to address issues with port 80 not opening by changing expected value of openPorts to 1 if 
+        input was greater than or equal to 22. 
+Also added testVar variable to main for ease of testing.
