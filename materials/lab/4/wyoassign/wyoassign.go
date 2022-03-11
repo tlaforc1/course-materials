@@ -103,11 +103,24 @@ func UpdateAssignment(w http.ResponseWriter, r *http.Request) {
 	log.Printf("Entering %s end point", r.URL.Path)
 	w.Header().Set("Content-Type", "application/json")
 	
-	var response Response
-	response.Assignments = Assignments
+	params := mux.Vars(r)
+	r.ParseForm()
+	for index, assignment := range Assignments {
+		if assignment.Id == params["id"] {
+			Assignments = append(Assignments[:index], Assignments[index+1:]...)
 
-
-
+			var updatedAssignment Assignment
+			if r.FormValue("id") != "" {
+				updatedAssignment.Id = r.FormValue("id")
+				updatedAssignment.Title = r.FormValue("title")
+				updatedAssignment.Description = r.FormValue("desc")
+				updatedAssignment.Points, _ = strconv.Atoi(r.FormValue("points"))
+				Assignments = append(Assignments, updatedAssignment)
+				w.WriteHeader(http.StatusCreated)
+			}
+			w.WriteHeader(http.StatusNotFound)
+		}
+	}	
 }
 
 func CreateAssignment(w http.ResponseWriter, r *http.Request) {
