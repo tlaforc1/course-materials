@@ -13,3 +13,5 @@ Due April 9th at 11:59PM
 1. Link to your Github Repository [16pts]
 2. Report the numbers [2pts]
 2. List of Collaborator
+
+Run with ./main FILENAME
